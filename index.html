@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Смета обустройства студии «Лучи»</title>
+<style>
+  :root {
+    --bg:#F1EFEA; --card:#FBFAF7; --ink:#22201C; --muted:#8B857A; --faint:#A9A399;
+    --line:#E4DFD6; --line2:#EDE9E1; --graphite:#33413F; --accent:#A85A32;
+    --accent-soft:#EFE2D6; --hover:#F3EDE5; --shadow:0 1px 2px rgba(40,34,25,.04),0 8px 24px -12px rgba(40,34,25,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#171614; --card:#201F1C; --ink:#ECE7DE; --muted:#9A9488; --faint:#6E695F;
+      --line:#312F2A; --line2:#282621; --graphite:#A8B7B4; --accent:#CE8155;
+      --accent-soft:#33271F; --hover:#282621; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#171614; --card:#201F1C; --ink:#ECE7DE; --muted:#9A9488; --faint:#6E695F;
+    --line:#312F2A; --line2:#282621; --graphite:#A8B7B4; --accent:#CE8155;
+    --accent-soft:#33271F; --hover:#282621; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"] {
+    --bg:#F1EFEA; --card:#FBFAF7; --ink:#22201C; --muted:#8B857A; --faint:#A9A399;
+    --line:#E4DFD6; --line2:#EDE9E1; --graphite:#33413F; --accent:#A85A32;
+    --accent-soft:#EFE2D6; --hover:#F3EDE5; --shadow:0 1px 2px rgba(40,34,25,.04),0 8px 24px -12px rgba(40,34,25,.10);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:780px; margin:0 auto; padding:32px 20px 64px; }
+  .num { font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; }
+
+  .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:11.5px; font-weight:600; color:var(--accent); margin:0 0 10px; }
+  h1 { font-size:26px; line-height:1.18; font-weight:680; letter-spacing:-.01em; margin:0 0 8px; text-wrap:balance; }
+  .lede { color:var(--muted); font-size:14px; margin:0; max-width:60ch; }
+  .lede b { color:var(--ink); font-weight:600; }
+
+  .kpis { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:12px; margin:26px 0 20px; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 16px 15px; box-shadow:var(--shadow); }
+  .kpi.hero { border-color:var(--accent); background:linear-gradient(180deg,var(--accent-soft),var(--card)); }
+  .kpi .klab { font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600; margin:0 0 8px; }
+  .kpi .kval { font-size:25px; font-weight:700; letter-spacing:-.02em; margin:0; line-height:1; }
+  .kpi.hero .kval { color:var(--accent); font-size:29px; }
+  .kpi .kfoot { font-size:11.5px; color:var(--faint); margin:7px 0 0; }
+  .hint { font-size:12.5px; color:var(--muted); margin:0 0 30px; display:flex; align-items:center; gap:6px; }
+  .hint .ext { color:var(--accent); }
+
+  .block { background:var(--card); border:1px solid var(--line); border-radius:14px; margin:0 0 14px; box-shadow:var(--shadow); overflow:hidden; }
+  .bhead { display:flex; align-items:baseline; gap:10px; padding:15px 18px 13px; border-bottom:1px solid var(--line2); flex-wrap:wrap; }
+  .bcode { font-size:12px; font-weight:700; color:var(--card); background:var(--graphite); width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; flex:none; }
+  .bhead h2 { font-size:16px; font-weight:650; margin:0; letter-spacing:-.01em; }
+  .btag { font-size:12px; color:var(--muted); font-style:italic; }
+  .bsub { margin-left:auto; font-size:15px; font-weight:700; letter-spacing:-.01em; font-variant-numeric:tabular-nums; }
+  .rows { display:flex; flex-direction:column; }
+  .row { display:grid; grid-template-columns:1fr auto; gap:14px; padding:11px 18px; border-bottom:1px solid var(--line2); align-items:start; text-decoration:none; color:inherit; transition:background .12s; }
+  .row:last-child { border-bottom:0; }
+  .row:hover { background:var(--hover); }
+  .row:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+  .rmain { display:flex; flex-direction:column; gap:1px; min-width:0; }
+  .pos { font-weight:600; font-size:14.5px; }
+  .ext { font-size:11px; color:var(--accent); margin-left:5px; vertical-align:1px; opacity:.7; }
+  .model { font-size:12.5px; color:var(--muted); }
+  .rmeta { display:flex; gap:8px; flex-wrap:wrap; align-items:baseline; margin-top:3px; }
+  .shop { font-size:11.5px; color:var(--faint); }
+  .note { font-size:11.5px; color:var(--accent); opacity:.9; }
+  .note::before { content:"· "; color:var(--faint); }
+  .rprice { text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:1px; }
+  .qty { font-size:11px; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .sum { font-weight:650; font-size:14.5px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+  .totals { margin:22px 0 0; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); }
+  .trow { display:flex; justify-content:space-between; align-items:center; padding:13px 18px; background:var(--card); border-bottom:1px solid var(--line2); gap:12px; }
+  .trow .tl { font-size:14px; color:var(--muted); }
+  .trow.grand { background:linear-gradient(180deg,var(--accent-soft),var(--card)); border-bottom:0; padding:17px 18px; }
+  .trow.grand .tl { color:var(--ink); font-weight:650; font-size:15px; }
+  .trow .tv { font-weight:650; font-size:15px; font-variant-numeric:tabular-nums; }
+  .trow.grand .tv { color:var(--accent); font-size:23px; font-weight:750; letter-spacing:-.02em; }
+
+  .foot { margin:28px 0 0; font-size:12.5px; color:var(--muted); line-height:1.6; }
+  .foot b { color:var(--ink); }
+  .meta { display:flex; gap:14px; flex-wrap:wrap; margin:14px 0 0; font-size:11.5px; color:var(--faint); }
+  .meta span::before { content:"— "; }
+
+  @media (max-width:560px) {
+    .wrap { padding:24px 14px 48px; }
+    .kpis { grid-template-columns:1fr 1fr; }
+    .kpi.hero { grid-column:1 / -1; }
+    h1 { font-size:23px; }
+  }
+  @media (prefers-reduced-motion:no-preference) {
+    .block,.kpi,.totals { animation:rise .5s cubic-bezier(.2,.7,.3,1) both; }
+    .kpis .kpi:nth-child(2){animation-delay:.04s} .kpis .kpi:nth-child(3){animation-delay:.08s}
+    @keyframes rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Смета обустройства · под сдачу</p>
+  <h1>Студия ЖК «Лучи», Солнцево — обставить с нуля</h1>
+  <p class="lede">План 2: узкая кровать 120×200 + мини-диван + Г-кухня + душ. Цены <b>июль 2026</b>, Москва/МО. Техника — рабочий эконом (Ozon/DNS), <b>санузел — надёжный уровень с Лемана ПРО</b> (инвест под сдачу, служит долго).</p>
+
+  <div class="kpis">
+    <div class="kpi hero">
+      <p class="klab">Всего под ключ</p>
+      <p class="kval num">617 459 ₽</p>
+      <p class="kfoot">докупка + встройка на заказ, с резервом 10%</p>
+    </div>
+    <div class="kpi">
+      <p class="klab">Докупка</p>
+      <p class="kval num">361 326 ₽</p>
+      <p class="kfoot">техника, мебель, сантехника, текстиль</p>
+    </div>
+    <div class="kpi">
+      <p class="klab">Встройка на заказ</p>
+      <p class="kval num">200 000 ₽</p>
+      <p class="kfoot">кухня + шкафы (ориентир, после замера)</p>
+    </div>
+  </div>
+  <p class="hint"><span class="ext">↗</span> Кликни по названию любой позиции — откроется карточка товара или поиск по модели</p>
+
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">A</span>
+        <h2>Мебель готовая</h2><span class="btag">покупаем и привозим</span>
+        <span class="bsub">91 490 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://www.ozon.ru/search/?text=кровать+120х200+с+подъёмным+механизмом" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Кровать 120×200<span class="ext">↗</span></span>
+            <span class="model">С подъёмным механизмом (ящик)</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">низ рынка; оптимум ~33К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">20 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=матрас+120х200+независимый+пружинный+средней+жёсткости" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Матрас 120×200<span class="ext">↗</span></span>
+            <span class="model">Независимый пружинный, средняя жёсткость (Askona/Blue Sleep)</span>
+            <span class="rmeta"><span class="shop">Ozon / Askona</span><span class="note">оптимум под сдачу (инвест, не дно)</span></span>
+          </span>
+          <span class="rprice"><span class="sum">20 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/divan-sharm-dizayn-kolombo-bp-33070482-126x95x110-sm-velyur-cvet-shokoladnyy-90507468/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Диван раскладной ~126 см<span class="ext">↗</span></span>
+            <span class="model">Шарм-Дизайн Коломбо БП 126, велюр, аккордеон · спальное 194×120</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">полноценный 2-местный, НЕ кресло; глубина 95</span></span>
+          </span>
+          <span class="rprice"><span class="sum">38 990 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=письменный+стол+100+см" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Письменный стол<span class="ext">↗</span></span>
+            <span class="model">Столешница 100–120 см (рабочее место по ТЗ)</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">оценка, цену не сверял</span></span>
+          </span>
+          <span class="rprice"><span class="sum">4 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=стул+со+спинкой" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Стул со спинкой<span class="ext">↗</span></span>
+            <span class="model">Офисный/кухонный</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">оценка</span></span>
+          </span>
+          <span class="rprice"><span class="sum">4 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=барный+табурет" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Барный табурет<span class="ext">↗</span></span>
+            <span class="model">К барной стойке кухни (×3)</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">оценка</span></span>
+          </span>
+          <span class="rprice"><span class="qty">1 500 ₽ × 3</span><span class="sum">4 500 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">B</span>
+        <h2>Встроенная мебель на заказ</h2><span class="btag">у мебельщика; пересекается с бюджетом ремонта — в общем бюджете не считать дважды</span>
+        <span class="bsub">200 000 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://lemanapro.ru/search/?q=кухонный+гарнитур" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Кухня-гарнитур (стенка)<span class="ext">↗</span></span>
+            <span class="model">Линейная ~2,4 м, фасады + столешница, под встройку техники</span>
+            <span class="rmeta"><span class="shop">мебельщик / Лемана</span><span class="note">ориентир, точно после замера</span></span>
+          </span>
+          <span class="rprice"><span class="sum">110 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/search/?q=шкаф+распашной" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Шкаф-стенка до потолка + шкаф 600<span class="ext">↗</span></span>
+            <span class="model">Корпусные до 2,75 м, на заказ</span>
+            <span class="rmeta"><span class="shop">мебельщик</span><span class="note">ориентир; максимум хранения по ТЗ</span></span>
+          </span>
+          <span class="rprice"><span class="sum">90 000 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">C</span>
+        <h2>Крупная техника</h2>
+        <span class="bsub">128 928 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://www.dns-shop.ru/search/?q=DEXP+43FCG1W" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Телевизор 43&quot; Smart TV<span class="ext">↗</span></span>
+            <span class="model">DEXP 43FCG1W, Google TV</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">оптимум для дистанции ~2,5 м</span></span>
+          </span>
+          <span class="rprice"><span class="sum">17 999 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/product/split-sistema-zanussi-zacs-07-hs-a21-n1-279597686/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Кондиционер сплит-07<span class="ext">↗</span></span>
+            <span class="model">Zanussi ZACS-07, ~2 кВт, до 20 м²</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">нижний порог</span></span>
+          </span>
+          <span class="rprice"><span class="sum">18 600 ₽</span></span>
+        </a>
+        <a class="row" href="https://yandex.ru/search/?text=монтаж+кондиционера+под+ключ+москва+цена" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Монтаж кондиционера<span class="ext">↗</span></span>
+            <span class="model">Под ключ: трасса 3–5 м, вакуум</span>
+            <span class="rmeta"><span class="shop">монтажники МСК</span><span class="note">диапазон 13–15К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">14 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://market.yandex.ru/product--stiralnaia-mashina-biriusa-wm-me610-04/1772858307" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Стиральная машина узкая<span class="ext">↗</span></span>
+            <span class="model">Бирюса WM-ME610, глубина 40 см, 6 кг</span>
+            <span class="rmeta"><span class="shop">Я.Маркет</span><span class="note">класс A+</span></span>
+          </span>
+          <span class="rprice"><span class="sum">21 793 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/product/dbf891a8b0deed20/holodilnik-s-morozilnikom---aceline-b16amg-belyj/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Холодильник узкий<span class="ext">↗</span></span>
+            <span class="model">Aceline B16AMG, 157 л, 54 см</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">встройка +14К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">18 999 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/product/7ba769b4929228b4/elektriceskij-duhovoj-skaf-dexp-1m70gcb-cernyj/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Духовка встраиваемая 60<span class="ext">↗</span></span>
+            <span class="model">DEXP 1M70GCB, конвекция+гриль</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">мини-печь настольная = 3,8К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">10 500 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/product/induktsionnaya-varochnaya-panel-comfee-cih301-invertor-2-konforki-sensornoe-upravlenie-9-urovney-1424453830/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Варочная индукция 2 конф.<span class="ext">↗</span></span>
+            <span class="model">Comfee CIH301 (домино 30 см)</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">4 конф. 60 см = 11К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">4 873 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/product/cff632b2b21b3330/vstraivaemaa-posudomoecnaa-masina-dexp-m10c6pb/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Посудомойка встраив. 45<span class="ext">↗</span></span>
+            <span class="model">DEXP M10C6PB, 9 комплектов</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">драйвер ставки под сдачу</span></span>
+          </span>
+          <span class="rprice"><span class="sum">14 290 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/product/vytyazhka-elikor-davoline-50p-290-p3l-beige-vstraivaemaya-33561471/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Вытяжка рециркуляц.<span class="ext">↗</span></span>
+            <span class="model">ELIKOR Davoline 50 (уголь докупить)</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">в шахту нельзя</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 520 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/product/mikrovolnovaya-pech-tuvio-mw02wb-belyy-2281966106/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Микроволновка 20 л<span class="ext">↗</span></span>
+            <span class="model">Tuvio MW02WB, 700 Вт</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">рейтинг 4.8</span></span>
+          </span>
+          <span class="rprice"><span class="sum">4 354 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">D</span>
+        <h2>Мелкая электроника</h2>
+        <span class="bsub">10 980 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://market.yandex.ru/card/umnaya-kolonka-novaya-yandeks-stantsiya-layt-2-s-alisoy-na-yagpt-zelenyy-6vt/4535572895" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Умная колонка<span class="ext">↗</span></span>
+            <span class="model">Яндекс Станция Лайт 2 (Алиса)</span>
+            <span class="rmeta"><span class="shop">Я.Маркет</span><span class="note">самая дешёвая с Алисой</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 780 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/product/adbbb54ad101ed20/wi-fi-router-keenetic-4g-kn-1212/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Wi-Fi роутер<span class="ext">↗</span></span>
+            <span class="model">Keenetic 4G KN-1212</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">критично для удалёнщика</span></span>
+          </span>
+          <span class="rprice"><span class="sum">2 950 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/product/826c5976fed53333/elektrocajnik-scarlett-sc-ek27g79-krasnyj/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Электрочайник<span class="ext">↗</span></span>
+            <span class="model">Scarlett SC-EK27G79, 1.7 л</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">на Ozon от ~1000</span></span>
+          </span>
+          <span class="rprice"><span class="sum">1 550 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/search/?q=фен+1400" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Фен<span class="ext">↗</span></span>
+            <span class="model">Scarlett/Delta, 1400 Вт</span>
+            <span class="rmeta"><span class="shop">DNS</span><span class="note">простой</span></span>
+          </span>
+          <span class="rprice"><span class="sum">800 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.dns-shop.ru/search/?q=утюг+Scarlett" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Утюг + гладильная доска<span class="ext">↗</span></span>
+            <span class="model">Утюг Scarlett + доска Nika</span>
+            <span class="rmeta"><span class="shop">DNS / Ozon</span><span class="note">800 + 1100</span></span>
+          </span>
+          <span class="rprice"><span class="sum">1 900 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">E</span>
+        <h2>Текстиль и посуда</h2><span class="btag">«заезд с чемоданом»</span>
+        <span class="bsub">14 197 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://www.wildberries.ru/catalog/0/search.aspx?search=шторы+блэкаут+150х270" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Шторы blackout<span class="ext">↗</span></span>
+            <span class="model">Комплект 2 шт 150×270, затемнение</span>
+            <span class="rmeta"><span class="shop">WB</span><span class="note">штора для сна</span></span>
+          </span>
+          <span class="rprice"><span class="sum">2 999 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=комплект+постельного+белья+1.5+сатин" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Постельное бельё 1,5-сп<span class="ext">↗</span></span>
+            <span class="model">Сатин/бязь</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">2 комплекта</span></span>
+          </span>
+          <span class="rprice"><span class="qty">999 ₽ × 2</span><span class="sum">1 998 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=одеяло+1.5+подушки+набор" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Одеяло + 2 подушки<span class="ext">↗</span></span>
+            <span class="model">Набор эконом</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">ориентир суммой</span></span>
+          </span>
+          <span class="rprice"><span class="sum">1 700 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=полотенца+набор+6+шт" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Полотенца, набор 6 шт<span class="ext">↗</span></span>
+            <span class="model">Хлопок</span>
+            <span class="rmeta"><span class="shop">Ozon</span></span>
+          </span>
+          <span class="rprice"><span class="sum">900 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=набор+посуды+кастрюли" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Набор посуды + кастрюли<span class="ext">↗</span></span>
+            <span class="model">Кастрюли + сковорода + приборы</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">стартовый набор</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=коврик+придверный" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Коврики (2 шт)<span class="ext">↗</span></span>
+            <span class="model">Придверный + в санузел</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">суммой</span></span>
+          </span>
+          <span class="rprice"><span class="sum">700 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=сушилка+для+белья+напольная+складная" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Сушилка для белья<span class="ext">↗</span></span>
+            <span class="model">Nika напольная складная</span>
+            <span class="rmeta"><span class="shop">Ozon</span></span>
+          </span>
+          <span class="rprice"><span class="sum">900 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=набор+для+уборки+швабра+ведро" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Ведро + набор для уборки<span class="ext">↗</span></span>
+            <span class="model">Швабра + средства</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">суммой</span></span>
+          </span>
+          <span class="rprice"><span class="sum">2 000 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">F</span>
+        <h2>Безопасность</h2><span class="btag">продаёт родителям студента</span>
+        <span class="bsub">21 150 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://www.ozon.ru/search/?text=Аквасторож+Классика+2+крана" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Защита от протечек<span class="ext">↗</span></span>
+            <span class="model">Аквасторож Классика, 2 крана</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">эконом от ~13К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">18 370 ₽</span></span>
+        </a>
+        <a class="row" href="https://market.yandex.ru/search?text=замок+врезной+Гардиан" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Дверной замок<span class="ext">↗</span></span>
+            <span class="model">Механич. врезной Гардиан</span>
+            <span class="rmeta"><span class="shop">Я.Маркет</span><span class="note">smart-замок = ~12К</span></span>
+          </span>
+          <span class="rprice"><span class="sum">1 800 ₽</span></span>
+        </a>
+        <a class="row" href="https://www.ozon.ru/search/?text=огнетушитель+ОП-2" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Огнетушитель + датчик дыма<span class="ext">↗</span></span>
+            <span class="model">ОП-2 + датчик ИП 212</span>
+            <span class="rmeta"><span class="shop">Ozon</span><span class="note">если в доме нет</span></span>
+          </span>
+          <span class="rprice"><span class="sum">980 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">G</span>
+        <h2>Санузел — сантехника (Лемана ПРО)</h2><span class="btag">надёжный уровень; монтаж/разводка — работа сантехника, в ремонт</span>
+        <span class="bsub">87 948 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://lemanapro.ru/product/komplekt-installyaciya-s-podvesnym-unitazom-82259202/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Унитаз подвесной + инсталляция<span class="ext">↗</span></span>
+            <span class="model">Jacob Delafon Brive: инсталляция + унитаз + кнопка + микролифт</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">комплект</span></span>
+          </span>
+          <span class="rprice"><span class="sum">14 000 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/rakovina-cersanit-carina-55-90014133/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Раковина 55 см с переливом<span class="ext">↗</span></span>
+            <span class="model">Cersanit Carina 55</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">Carina 60 = 4400</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 790 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/smesitel-dlya-rakoviny-iddis-brent-bresb00i01-odnorychazhnyy-cvet-hrom-89398605/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Смеситель для раковины<span class="ext">↗</span></span>
+            <span class="model">Iddis Brent, латунь, гарантия 10 лет</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">надёжный, проверен</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 892 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/dushevaya-sistema-dikalan-b9065-odnorychazhnyy-smesitel-s-tropicheskim-dushem-cvet-satin-92054225/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Душевая система<span class="ext">↗</span></span>
+            <span class="model">DIKALAN B9065: тропич. душ + лейка + смеситель</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">комплект</span></span>
+          </span>
+          <span class="rprice"><span class="sum">11 460 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/gigienicheskiy-dush-so-smesitelem-d-lin-d183201-91477414/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Гигиенический душ<span class="ext">↗</span></span>
+            <span class="model">D-Lin D183201, хром + смеситель</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">для подмывания</span></span>
+          </span>
+          <span class="rprice"><span class="sum">3 965 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/nakopitelnyy-vodonagrevatel-elektricheskiy-30-l-ariston-blu1-r-abs-slim-3700617-2-kvt-emalirovannaya-stal-mokryy-ten-82138509/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Водонагреватель 30 л<span class="ext">↗</span></span>
+            <span class="model">Ariston BLU1 R ABS Slim, 2 кВт</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">опция: летние отключения ГВС</span></span>
+          </span>
+          <span class="rprice"><span class="sum">8 598 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/polotencesushitel-elektricheskiy-equation-450x600-mm-100-vt-s-termoregulyatorom-lesenka-cvet-chernyy-89352315/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Полотенцесушитель электро<span class="ext">↗</span></span>
+            <span class="model">Equation 450×600, 100 Вт, терморегулятор</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">опция, если не водяной от стояка</span></span>
+          </span>
+          <span class="rprice"><span class="sum">7 588 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/shkaf-zerkalnyy-podvesnoy-krakov-s-podsvetkoy-60x72sm-cvet-belyy-85235134/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Зеркало-шкаф с подсветкой<span class="ext">↗</span></span>
+            <span class="model">Краков 60×72, белый</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">зеркало над раковиной по ТЗ</span></span>
+          </span>
+          <span class="rprice"><span class="sum">7 765 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/dushevoy-poddon-sensea-basic-akril-90x90-sm-82658172/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Душевой поддон 90×90<span class="ext">↗</span></span>
+            <span class="model">Sensea Basic, акрил</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">или трап в полу (−11,6К) — решить с Лией</span></span>
+          </span>
+          <span class="rprice"><span class="sum">11 600 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/dushevoy-ugolok-sensea-quad-kvadratnyy-90x90-sm-hromirovannyy-profil-prozrachnoe-steklo-razdvizhnoy-18121214/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Душевой уголок 90×90<span class="ext">↗</span></span>
+            <span class="model">Sensea Quad, закалённое стекло, раздвижной</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">стекло, не пластик</span></span>
+          </span>
+          <span class="rprice"><span class="sum">12 990 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/stoyka-dlya-ershika-i-tualetnoy-bumagi-sensea-scandi-7616-sm-stal-cvet-belyy-81980455/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Аксессуары санузла<span class="ext">↗</span></span>
+            <span class="model">Sensea Scandi, сталь (ёршик + бумага + крючки + полка)</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">комплект в едином стиле</span></span>
+          </span>
+          <span class="rprice"><span class="sum">2 300 ₽</span></span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <header class="bhead">
+        <span class="bcode">H</span>
+        <h2>Кухня — мойка и смеситель (Лемана ПРО)</h2>
+        <span class="bsub">6 633 ₽</span>
+      </header>
+      <div class="rows">
+        <a class="row" href="https://lemanapro.ru/product/moyka-dlya-kuhni-vreznaya-ukinox-465x488-sm-glubina-chashi-165-sm-nerzhaveyushchaya-stal-cvet-seryy-86163909/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Кухонная мойка врезная<span class="ext">↗</span></span>
+            <span class="model">Ukinox 46×48, нержавейка, 1 чаша</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">врезная под тумбу 60</span></span>
+          </span>
+          <span class="rprice"><span class="sum">2 335 ₽</span></span>
+        </a>
+        <a class="row" href="https://lemanapro.ru/product/smesitel-dlya-kuhni-am-pm-spike-cvet-hrom-84177509/" target="_blank" rel="noopener">
+          <span class="rmain">
+            <span class="pos">Смеситель для кухни<span class="ext">↗</span></span>
+            <span class="model">AM.PM Spike, высокий поворотный излив</span>
+            <span class="rmeta"><span class="shop">Лемана ПРО</span><span class="note">Iddis Male ~7К надёжнее</span></span>
+          </span>
+          <span class="rprice"><span class="sum">4 298 ₽</span></span>
+        </a>
+      </div>
+    </section>
+
+  <div class="totals">
+    <div class="trow"><span class="tl">Итого позиций</span><span class="tv num">561 326 ₽</span></div>
+    <div class="trow"><span class="tl">Резерв 10% <span style="color:var(--faint)">· доставка, мелочь, погрешность</span></span><span class="tv num">56 133 ₽</span></div>
+    <div class="trow grand"><span class="tl">Всего под ключ <span style="font-weight:400;color:var(--muted)">(без встройки)</span></span><span class="tv num">617 459 ₽</span></div>
+  </div>
+
+  <p class="foot"><b>Как читать.</b> Уровень: техника — рабочий эконом, санузел и диван — надёжный (Лемана ПРО), матрас в оптимуме — инвестпроект, берём на срок службы. <b>Встройка (блок B)</b> — кухня-гарнитур и шкафы на заказ, цифра ориентировочная (точно после замера у мебельщика); <b>пересекается с бюджетом ремонта — в общем бюджете проекта не считать дважды.</b> <b>Не входят работы:</b> монтаж сантехники (инсталляция, поддон, разводка, бойлер). Бойлер и полотенцесушитель в блоке G — «опция» (−16К, если не нужны). Ссылки Лемана ПРО в браузере откроются (ботам сайт даёт 401).</p>
+
+  <div class="meta"><span>Объект: студия 22 м², комната 15,6 м²</span><span>Обновлено 18.07.2026</span><span>xlsx для правок — в папке проекта</span></div>
+</div>
+
+</body>
+</html>
